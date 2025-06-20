@@ -156,6 +156,12 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Deepali Font';
+  src: url('/fonts/handwriting-1.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 @media (max-width: 768px) {
