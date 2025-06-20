@@ -46,11 +46,60 @@ export default function DownloadSection({ generatePDFRef, setHnumber, Handwritin
         Handwriting 1
       </p>
       <p
-        className="p-2 bg-pink-100 m-2 cursor-pointer"
+        className="p-2 bg-pink-100 m-2 cursor-pointer "
         onClick={() => setHnumber(1)}
         style={{ fontFamily: Handwriting[1].name }}
       >
         Handwriting 2
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(2)}
+        style={{ fontFamily: Handwriting[2].name }}
+      >
+        Handwriting 3
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(3)}
+        style={{ fontFamily: Handwriting[3].name }}
+      >
+        Handwriting 4
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(4)}
+        style={{ fontFamily: Handwriting[4].name }}
+      >
+        Handwriting 5
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(5)}
+        style={{ fontFamily: Handwriting[5].name }}
+      >
+        Handwriting 6
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(6)}
+        style={{ fontFamily: Handwriting[6].name }}
+      >
+        Handwriting 7
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(7)}
+        style={{ fontFamily: Handwriting[7].name }}
+      >
+        Handwriting 8
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer text-xl"
+        onClick={() => setHnumber(8)}
+        style={{ fontFamily: Handwriting[8].name }}
+      >
+        Handwriting 9
       </p>
     </div>
   );
