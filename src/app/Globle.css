@@ -1,0 +1,169 @@
+@import "tailwindcss";
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 17px;
+  padding: 10px;
+}
+
+.a4-page {
+  width: 20cm;
+  height: 28.3cm;
+  color: #4f73b1;
+  padding: 3.3cm 1cm 1cm 3.5cm;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  line-height: 37px;
+  overflow: hidden;
+  position: relative;
+  background-color: white; /* Ensure background is white */
+  background-image: linear-gradient(to bottom, #dcdcdc 0%, #c0c0c0 30%, #c4c4c4 60%, #b8b8b8 100%);/* Subtle shading */
+}
+
+/* Red vertical line using ::before */
+.a4-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2.5cm; /* aligned with left padding to simulate margin */
+  width: 1px;
+  background-color: red;
+  z-index: 1;
+}
+
+
+/* Add horizontal lines starting after the first 3cm (from the top) */
+.a4-page::after {
+  content: "";
+  position: absolute;
+  top: 3cm;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: block;
+  background-size: 100% 37px;
+  background-repeat: repeat-y;
+  background-image: linear-gradient(to bottom, black 1px, transparent 1px);
+}
+
+
+.NotebookContainer {
+  width: 100%;
+}
+
+/* Print Styles */
+@media print {
+  body, .a4-page {
+    background-color: white !important; /* Ensure background is white for print */
+    color: #4f73b1 !important; /* Ensure text is black for print */
+  }
+
+  /* Ensure that background images are included when printing */
+  .a4-page {
+    -webkit-print-color-adjust: exact; /* Chrome/Edge */
+    print-color-adjust: exact; /* Firefox */
+  }
+
+  @media print {
+  .a4-page::before,
+  .a4-page::after {
+    content: "";
+    display: block !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+
+  /* Remove any unwanted margins in print */
+  @page {
+    size: A4; 
+    margin: 0;
+  }
+
+  /* Ensure background colors and images print */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+/* From Uiverse.io by adamgiebl */ 
+.spinner {
+  width: 80px;
+  height: 80px;
+  --clr: rgb(148, 143, 212);           /* #8179FC */
+  --clr-alpha: rgba(216, 172, 241, 0.1); /* #D8ACF1 with 0.1 opacity */
+  animation: spinner 2s infinite linear;
+  transform-style: preserve-3d;
+}
+
+
+.spinner > div {
+  background-color: var(--clr-alpha);
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  border: 5px solid var(--clr);
+}
+
+.spinner div:nth-of-type(1) {
+  transform: translateZ(-40px) rotateY(180deg);
+}
+
+.spinner div:nth-of-type(2) {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+}
+
+.spinner div:nth-of-type(3) {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+}
+
+.spinner div:nth-of-type(4) {
+  transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center;
+}
+
+.spinner div:nth-of-type(5) {
+  transform: rotateX(-90deg) translateY(50%);
+  transform-origin: bottom center;
+}
+
+.spinner div:nth-of-type(6) {
+  transform: translateZ(40px);
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg) rotateX(0deg) rotateY(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg) rotateX(180deg) rotateY(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg) rotateX(360deg) rotateY(360deg);
+  }
+}
+
+@font-face {
+  font-family: 'GloriaHallelujah';
+  src: url('https://fonts.gstatic.com/s/gloriahallelujah/v22/LYjYdHv3kUk9BMV96EIswT9DIbW-MIS11zM.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@media (max-width: 768px) {
+  .PaginatedNotebok{
+   position: absolute;
+    left: -9999px;
+    top: 0;
+   
+  }
+}
+

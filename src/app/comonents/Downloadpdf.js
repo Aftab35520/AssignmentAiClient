@@ -1,0 +1,57 @@
+"use client";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
+export default function DownloadSection({ generatePDFRef, setHnumber, Handwriting }) {
+  const generatePDF = async () => {
+    const input = generatePDFRef.current;
+    const canvas = await html2canvas(input, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+    heightLeft -= pdfHeight;
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight);
+      heightLeft -= pdfHeight;
+    }
+
+    pdf.save("notebook.pdf");
+  };
+
+  return (
+    <div className="sticky top-0">
+      <button
+        onClick={generatePDF}
+        className="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
+      >
+        Generate PDF
+      </button>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer"
+        onClick={() => setHnumber(0)}
+      >
+        Handwriting 1
+      </p>
+      <p
+        className="p-2 bg-pink-100 m-2 cursor-pointer"
+        onClick={() => setHnumber(1)}
+        style={{ fontFamily: Handwriting[1].name }}
+      >
+        Handwriting 2
+      </p>
+    </div>
+  );
+}
