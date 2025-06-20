@@ -46,6 +46,7 @@ export default function Page() {
             Handwriting={Handwriting}
             HNumber={HNumber}
           />
+          <h1 style={{fontFamily:"Deepali Font"}}></h1>
         </div>
       </div>
     </div>
