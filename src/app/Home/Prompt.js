@@ -39,11 +39,11 @@ export default function Prompt() {
   };
 // 140px
   return (
-    <div className={`w-[110%] ${file?'h-[140px]':'h-[70px]'} max-lg:w-[90%]   rounded-[40px] mt-10 bg-white text-black flex justify-between  ${file?'items-end':'items-center'} p-5 relative`}>
+    <div className={`w-[110%] ${file?'h-[140px]':'h-[70px]'} max-lg:w-[90%]   rounded-[40px] mt-10 bg-white text-black flex justify-between  ${file?'items-end':'items-center'} p-5 relative overflow-hidden`}>
       {
-        file?<div className="absolute top-[10%]  w-[300px] h-[50px] flex items-center justify-start p-1 rounded-[20px]  border-gray-200 border-2">
-        <Image src={Pdf} alt="" className="mr-[-20px] ml-3" />
-        <p className="text-[14px] w-[265px]  h-5 overflow-hidden">{file?.name}</p>
+        file?<div className="absolute top-[10%]  w-[300px] h-[50px] flex items-center justify-start p-1 rounded-[20px]  max-sm:w-[200px]   border-gray-200 border-2">
+        <Image src={Pdf} alt="" className="mr-[10px] ml-3" />
+        <p className="text-[14px] w-[220px] max-sm:w-[120px]  h-5 overflow-hidden  text-start">{file?.name}</p>
       </div>:<></>
       }
       <div className="flex items-center justify-between w-full relative">
