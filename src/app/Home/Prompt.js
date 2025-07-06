@@ -3,16 +3,17 @@ import Image from "next/image";
 import { useState } from "react";
 import pngwing from "../asset/awd.png";
 import image from "../asset/download.png";
-import PdfLogo from "../asset/PdfLogo.png";
+import Pdf from "../asset/pdf.png";
+import Plus from "../asset/plus.png";
 import LiveUrl from "../comonents/Url";
 import { useMyContext } from "../ContextApi/CreateContext";
 export default function Prompt() {
   const { setAnswer } = useMyContext();
   const [question, setQuestion] = useState("");
   const [file, setfile] = useState(null);
-
+  const[message,setMessage]=useState(false)
   const GetApiResponse = async (e) => {
-    setAnswer("Loading")
+    setAnswer("Loading");
     const formData = new FormData();
     if (file && question) {
       formData.append("pdf", file);
@@ -36,55 +37,67 @@ export default function Prompt() {
       setAnswer("Default");
     }
   };
-
+// 140px
   return (
-    <div className="w-[110%] h-[70px] max-lg:w-[90%]   rounded-[40px] mt-8 bg-white text-black flex items-center p-5">
-      <Image src={image} alt="d" width={50} />
-      <div style={{ position: "relative" }}>
-        <input
-        
-          type="file"
-          accept="application/pdf"
-          id="file-upload"
-          onChange={(e) => setfile(e.target.files[0])}
-          style={{
-            display: "none", // Hide the default file input
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%", // Make the input cover the area
-            height: "100%", // Make the input cover the area
-            opacity: 0,
-          }}
-        />
-        <label htmlFor="file-upload">
-          <Image
-            src={PdfLogo}
-            alt="Upload PDF"
-            width={40}
-            height={40}
-            className="cursor-pointer"
+    <div className={`w-[110%] ${file?'h-[140px]':'h-[70px]'} max-lg:w-[90%]   rounded-[40px] mt-10 bg-white text-black flex justify-between  ${file?'items-end':'items-center'} p-5 relative`}>
+      {
+        file?<div className="absolute top-[10%]  w-[300px] h-[50px] flex items-center justify-start p-1 rounded-[20px]  border-gray-200 border-2">
+        <Image src={Pdf} alt="" className="mr-[-20px] ml-3" />
+        <p className="text-[14px] w-[265px]  h-5 overflow-hidden">{file?.name}</p>
+      </div>:<></>
+      }
+      <div className="flex items-center justify-between w-full relative">
+        {
+          message?<p className="absolute top-[40px] left-[50px] text-gray-500 text-[14px]">Upload Pdf</p>:<></>
+        }
+        <Image src={image} alt="d" width={50} />
+        <div style={{ position: "relative" }}>
+          <input
+            type="file"
+            accept="application/pdf"
+            id="file-upload"
+            onChange={(e) => setfile(e.target.files[0])}
+            style={{
+              display: "none", // Hide the default file input
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%", // Make the input cover the area
+              height: "100%", // Make the input cover the area
+              opacity: 0,
+            }}
           />
-        </label>
+          <label htmlFor="file-upload">
+            <Image
+              src={Plus}
+              alt="Upload PDF"
+              width={30}
+              height={30}
+              className="cursor-pointer ml-1 "
+              onMouseEnter={() => {setMessage(true)}}
+              onMouseLeave={() => {setMessage(false)}}
+            />
+          </label>
+        </div>
+        <input
+          type="text"
+          placeholder="Enter Prompt.."
+          value={question}
+          className="w-full m-1.5 p-1.5 outline-0 text-black/50 ml-[17px]"
+          onChange={(e) => setQuestion(e.target.value)}
+        />
+        <Image
+          src={pngwing}
+          alt=""
+          width={37}
+          className={`${
+            question || file
+              ? "cursor-pointer"
+              : "pointer-events-none grayscale"
+          }`}
+          onClick={GetApiResponse}
+        />
       </div>
-      <input
-        
-        type="text"
-        placeholder="Enter Prompt.."
-        value={question}
-        className="w-full m-1.5 p-1.5 outline-0 text-black/50"
-        onChange={(e) => setQuestion(e.target.value)}
-      />
-      <Image
-
-        src={pngwing}
-        alt=""
-        width={37}
-        className={`${
-          question || file ? "cursor-pointer" : "pointer-events-none grayscale" 
-        }`}
-        onClick={GetApiResponse}
-      />
     </div>
   );
 }
