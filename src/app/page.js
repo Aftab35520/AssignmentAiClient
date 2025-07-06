@@ -31,7 +31,7 @@ export default function Page() {
       <div className="w-full flex flex-col items-center">
         <Header />
         <Herro />
-        <div className="flex flex-row-reverse relative max-sm:flex-col">
+        <div className="flex flex-row-reverse relative FlexingCol">
           {Answer !== "Loading" && Answer !== "Default" && (
             <DownloadSection
               generatePDFRef={notebookRef}

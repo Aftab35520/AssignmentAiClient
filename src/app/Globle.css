@@ -93,11 +93,12 @@ body {
 .spinner {
   width: 80px;
   height: 80px;
-  --clr: rgb(148, 143, 212);           /* #8179FC */
-  --clr-alpha: rgba(216, 172, 241, 0.1); /* #D8ACF1 with 0.1 opacity */
+  --clr: #2A2C62;                          /* Deep indigo */
+  --clr-alpha: rgba(42, 44, 98, 0.1);      /* Transparent version for effects */
   animation: spinner 2s infinite linear;
   transform-style: preserve-3d;
 }
+
 
 
 .spinner > div {
@@ -135,6 +136,12 @@ body {
 .spinner div:nth-of-type(6) {
   transform: translateZ(40px);
 }
+@keyframes fadeInOut {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 
 @keyframes spinner {
   0% {
@@ -216,7 +223,74 @@ body {
    position: absolute;
     left: -9999px;
     top: 0;
-   
+  }
+  .FlexingCol{
+    flex-direction: column;
+  }
+  .FontSelector{
+    display: none;
+  }
+  .FontSelectorContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
 }
+@media (min-width: 768px) {
+ .PaginatedNotebokMobile{
+  display: none;
+ }
+ .AlertDesktop{
+  display: none;
+ }
+}
 
+.PaginatedNotebokMobile{
+  height: 13.3cm;
+}
+
+.a4-pageMobile{
+ width: 98%;
+  height: 13.3cm;
+  color: #4f73b1;
+  padding: 1.3cm .2cm 1cm 1.5cm;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  line-height: 37px;
+  overflow: hidden;
+  position: relative;
+  background-color: white; /* Ensure background is white */
+  background-image: linear-gradient(to bottom, #dcdcdc 0%, #c0c0c0 30%, #c4c4c4 60%, #b8b8b8 100%);/* Subtle shading */
+}
+
+
+
+
+/* Red vertical line using ::before */
+.a4-pageMobile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 1.2cm; /* aligned with left padding to simulate margin */
+  width: 1px;
+  background-color: red;
+  z-index: 1;
+}
+
+
+/* Add horizontal lines starting after the first 3cm (from the top) */
+.a4-pageMobile::after {
+  content: "";
+  position: absolute;
+  top: 2cm;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: block;
+  background-size: 100% 25px;
+  background-repeat: repeat-y;
+  background-image: linear-gradient(to bottom, black 1px, transparent 1px);
+}

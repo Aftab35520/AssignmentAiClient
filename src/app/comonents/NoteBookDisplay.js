@@ -1,5 +1,6 @@
 "use client";
 import Loading from "./Loading";
+import PaginatedNotebookMobile from "./MobileNotebook";
 import PaginatedNotebook from "./Notebook";
 
 export default function NotebookDisplay({ Answer, notebookRef, Handwriting, HNumber }) {
@@ -15,10 +16,16 @@ export default function NotebookDisplay({ Answer, notebookRef, Handwriting, HNum
   if (Answer === "Default") return null;
 
   return (
+    <>
     <div className="h-[80dvh] overflow-y-scroll mt-4 max-sm:h-[10dvh] PaginatedNotebok">
       <div ref={notebookRef}>
         <PaginatedNotebook Handwriting={Handwriting[HNumber]} />
       </div>
     </div>
+    <div className="h-[80dvh] overflow-y-scroll mt-4 max-sm:h-[10dvh] no-scrollbar  PaginatedNotebokMobile">
+      <div >
+        <PaginatedNotebookMobile Handwriting={Handwriting[HNumber]} />
+      </div>
+    </div></>
   );
 }

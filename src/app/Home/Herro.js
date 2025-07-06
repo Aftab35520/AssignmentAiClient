@@ -1,7 +1,7 @@
 import Prompt from "./Prompt";
 export default function Herro() {
   return (
-    <div className="text-center text-white flex flex-col items-center">
+    <div className="text-center text-white flex flex-col items-center p-2">
       <p className="pt-[200px] max-md:pt-[100px] text-4xl text-white/90 font-semibold text-shadow-2xs">
         Generate Realistic Handwritten
       </p>
