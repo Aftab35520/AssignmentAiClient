@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import pngwing from "../asset/awd.png";
 import image from "../asset/download.png";
-import Pdf from "../asset/pdf.png";
+import Pdf from "../asset/Pdf.png";
 import Plus from "../asset/plus.png";
 import LiveUrl from "../comonents/Url";
 import { useMyContext } from "../ContextApi/CreateContext";
