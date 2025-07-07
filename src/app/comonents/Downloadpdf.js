@@ -37,12 +37,26 @@ export default function DownloadSection({
 
   return (
     <div className="sticky top-0 FontSelectorContainer">
-      <button
+      <div className="w-full  flex justify-between items-end">
+        <select
+          className="FontSelectorMobile bg-blue-500 p-2 rounded hidden"
+          onChange={(e) => setHnumber(Number(e.target.value))}
+        >
+          {Handwriting.map((font, index) => (
+            <option key={index} value={index} style={{ fontFamily: font.name }}>
+              Handwriting {index + 1}
+            </option>
+          ))}
+        </select>
+        <button
         onClick={generatePDF}
         className="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer"
       >
         Generate PDF
       </button>
+      </div>
+      
+
       <p
         className="text-white animate-[fadeInOut_2s_ease-in-out_infinite] AlertDesktop"
         style={{

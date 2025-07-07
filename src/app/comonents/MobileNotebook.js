@@ -32,18 +32,19 @@ const safeAnswer = Answer || "Default";
     newInputs[index] = event.target.value;
     setPageInputs(newInputs);
   };
+  console.log("Handwriting", Handwriting);
 
   return (
     <div
       className="NotebookContainer relative"
-      style={{ fontFamily: Handwriting.name, fontSize: '36px' }}
+      style={{ fontFamily: Handwriting.name, fontSize: Handwriting.name === "Deepali Font" ?  "36px" :Handwriting.name==="GloriaHallelujah"?'15px': "25px" }}
     >
       {pages.map((lines, index) => (
         <div
           key={index}
           className={"a4-pageMobile"}
           contentEditable={false} // disable contentEditable on whole page because of input
-          style={{ whiteSpace: "pre-line", paddingTop: '2.1cm', lineHeight: '23px' }}
+          style={{ whiteSpace: "pre-line", paddingTop:'2.2cm', lineHeight: '25px' }}
         >
           {/* Input field for this page */}
       

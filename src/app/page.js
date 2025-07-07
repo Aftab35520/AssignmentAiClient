@@ -17,13 +17,13 @@ export default function Page() {
   const Handwriting = [
     { name: "Deepali Font", size: "55px", paddingTop: "3.3cm" },
     { name: "GloriaHallelujah", size: "20px", paddingTop: "3cm" },
-    { name: "handwriting-2", size: "35px", paddingTop: "2.7cm" },
-    { name: "handwriting-3", size: "35px", paddingTop: "2.6cm" },
-    { name: "handwriting-4", size: "35px", paddingTop: "2.7cm" },
-    { name: "handwriting-5", size: "35px", paddingTop: "2.6cm" },
-    { name: "handwriting-6", size: "30px", paddingTop: "2.7cm" },
-    { name: "handwriting-7", size: "35px", paddingTop: "2.6cm" },
-    { name: "handwriting-8", size: "30px", paddingTop: "2.7cm" },
+    { name: "handwriting-2", size: "35px", paddingTop: "2.8cm" },
+    { name: "handwriting-3", size: "35px", paddingTop: "3.4cm" },
+    { name: "handwriting-4", size: "35px", paddingTop: "3.4cm" },
+    { name: "handwriting-5", size: "35px", paddingTop: "3.3cm" },
+    { name: "handwriting-6", size: "30px", paddingTop: "3.5cm" },
+    { name: "handwriting-7", size: "35px", paddingTop: "3.3cm" },
+    { name: "handwriting-8", size: "30px", paddingTop: "2.85cm" },
   ];
 
   return (
