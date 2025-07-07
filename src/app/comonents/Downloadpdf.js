@@ -39,11 +39,11 @@ export default function DownloadSection({
     <div className="sticky top-0 FontSelectorContainer">
       <div className="w-full  flex justify-between items-end">
         <select
-          className="FontSelectorMobile bg-blue-500 p-2 rounded hidden"
+          className="FontSelectorMobile bg-[#1447E6] text-white p-2 rounded hidden"
           onChange={(e) => setHnumber(Number(e.target.value))}
         >
           {Handwriting.map((font, index) => (
-            <option key={index} value={index} style={{ fontFamily: font.name }}>
+            <option key={index} value={index} style={{ fontFamily: font.name,fontSize:font.name=='GloriaHallelujah'?'10px':font.name=='Deepali Font'?'22px':'15px' } }>
               Handwriting {index + 1}
             </option>
           ))}

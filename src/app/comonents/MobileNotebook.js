@@ -32,8 +32,6 @@ const safeAnswer = Answer || "Default";
     newInputs[index] = event.target.value;
     setPageInputs(newInputs);
   };
-  console.log("Handwriting", Handwriting);
-
   return (
     <div
       className="NotebookContainer relative"
