@@ -43,7 +43,7 @@ export default function DownloadSection({
           onChange={(e) => setHnumber(Number(e.target.value))}
         >
           {Handwriting.map((font, index) => (
-            <option key={index} value={index} style={{ fontFamily: font.name,fontSize:font.name=='GloriaHallelujah'?'10px':font.name=='Deepali Font'?'22px':'15px' } }>
+            <option key={index} value={index} style={{ fontFamily: font.name,fontSize:font?.name=='GloriaHallelujah'?'10px':font?.name=='Deepali Font'?'22px':'15px' } }>
               Handwriting {index + 1}
             </option>
           ))}

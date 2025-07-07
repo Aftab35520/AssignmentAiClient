@@ -35,7 +35,7 @@ const safeAnswer = Answer || "Default";
   return (
     <div
       className="NotebookContainer relative"
-      style={{ fontFamily: Handwriting.name, fontSize: Handwriting.name === "Deepali Font" ?  "36px" :Handwriting.name==="GloriaHallelujah"?'15px': "25px" }}
+      style={{ fontFamily: Handwriting?.name, fontSize: Handwriting?.name === "Deepali Font" ?  "36px" :Handwriting?.name==="GloriaHallelujah"?'15px': "25px" }}
     >
       {pages.map((lines, index) => (
         <div

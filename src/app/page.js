@@ -50,7 +50,7 @@ export default function Page() {
         </div>
         
       </div>
-      <p  className="text-white fixed top-[-400px]">d</p>
+
     </div>
   );
 }
