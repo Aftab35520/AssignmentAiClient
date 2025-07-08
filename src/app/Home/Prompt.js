@@ -1,30 +1,70 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import pdfToText from "react-pdftotext";
 import pngwing from "../asset/awd.png";
 import image from "../asset/download.png";
 import Pdf from "../asset/Pdf.png";
 import Plus from "../asset/Plus.png";
 import LiveUrl from "../comonents/Url";
 import { useMyContext } from "../ContextApi/CreateContext";
+import CircularProgressWithLabel from "./ProgressBar";
+
 export default function Prompt() {
   const { setAnswer } = useMyContext();
   const [question, setQuestion] = useState("");
   const [file, setfile] = useState(null);
-  const[message,setMessage]=useState(false)
+  const [message, setMessage] = useState(false);
+  const [pdfText, setPdfText] = useState("");
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const extractText = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setLoading(true);
+    setProgress(0);
+
+    // Simulate progress while extracting
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 90) return prev; // wait for real completion
+        return prev + 5;
+      });
+    }, 100);
+
+    pdfToText(file)
+      .then((extractedText) => {
+        setPdfText(extractedText);
+        setProgress(100); // jump to 100 on completion
+        setTimeout(() => {
+          setLoading(false);
+          setProgress(0);
+        }, 1000);
+      })
+      .catch((err) => {
+        console.error("Failed to extract text from PDF:", err);
+        setLoading(false);
+      })
+      .finally(() => clearInterval(interval));
+      
+  };
+
   const GetApiResponse = async (e) => {
     setAnswer("Loading");
     const formData = new FormData();
-    if (file && question) {
-      formData.append("pdf", file);
+    if (pdfText && question) {
+      formData.append("pdfText", pdfText);
       formData.append("question", question);
-    } else if (file) {
-      formData.append("pdf", file);
+    } else if (pdfText) {
+      formData.append("pdfText", pdfText);
     } else if (question) {
       formData.append("question", question);
     }
     setQuestion("");
     setfile(null);
+    setPdfText("");
     try {
       const response = await fetch(`${LiveUrl}extract`, {
         method: "POST",
@@ -37,26 +77,48 @@ export default function Prompt() {
       setAnswer("Default");
     }
   };
-// 140px
   return (
-    <div className={`w-[110%] ${file?'h-[140px]':'h-[70px]'} max-lg:w-[90%]   rounded-[40px] mt-10 bg-white text-black flex justify-between  ${file?'items-end':'items-center'} p-5 relative overflow-hidden`}>
-      {
-        file?<div className="absolute top-[10%]  w-[300px] h-[50px] flex items-center justify-start p-1 rounded-[20px]  max-sm:w-[200px]   border-gray-200 border-2">
-        <Image src={Pdf} alt="" className="mr-[10px] ml-3" />
-        <p className="text-[14px] w-[220px] max-sm:w-[120px]  h-5 overflow-hidden  text-start">{file?.name}</p>
-      </div>:<></>
-      }
+    <div
+      className={`w-[110%] ${
+        file ? "h-[140px]" : "h-[70px]"
+      } max-lg:w-[90%]   rounded-[40px] mt-10 bg-white text-black flex justify-between  ${
+        file ? "items-end" : "items-center"
+      } p-5 relative overflow-hidden`}
+    >
+      {file ? (
+        <div className="absolute top-[10%]  w-[300px] h-[50px] flex items-center justify-start p-1 rounded-[20px]  max-sm:w-[200px]   border-gray-200 border-2">
+          <div className=" relative ">
+            {loading && (
+              <div className="absolute inset-0 z-50 bg-[#A375FF] w-[50%] left-[25%] h-[80%] top-[10%] flex items-center justify-center">
+                <CircularProgressWithLabel value={progress} />
+              </div>
+            )}
+            <Image src={Pdf} alt="" className="mr-[10px] ml-3" />
+          </div>
+          <p className="text-[14px] w-[220px] max-sm:w-[120px]  h-5 overflow-hidden  text-start">
+            {file?.name}
+          </p>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="flex items-center justify-between w-full relative">
-        {
-          message?<p className="absolute top-[40px] left-[50px] text-gray-500 text-[14px]">Upload Pdf</p>:<></>
-        }
+        {message ? (
+          <p className="absolute top-[40px] left-[50px] text-gray-500 text-[14px]">
+            Upload Pdf
+          </p>
+        ) : (
+          <></>
+        )}
         <Image src={image} alt="d" width={50} />
         <div style={{ position: "relative" }}>
           <input
             type="file"
             accept="application/pdf"
             id="file-upload"
-            onChange={(e) => setfile(e.target.files[0])}
+            onChange={(e) => {
+              extractText(e), setfile(e.target.files[0]);
+            }}
             style={{
               display: "none", // Hide the default file input
               position: "absolute",
@@ -74,8 +136,12 @@ export default function Prompt() {
               width={30}
               height={30}
               className="cursor-pointer ml-1 "
-              onMouseEnter={() => {setMessage(true)}}
-              onMouseLeave={() => {setMessage(false)}}
+              onMouseEnter={() => {
+                setMessage(true);
+              }}
+              onMouseLeave={() => {
+                setMessage(false);
+              }}
             />
           </label>
         </div>
@@ -91,7 +157,7 @@ export default function Prompt() {
           alt=""
           width={37}
           className={`${
-            question || file
+            (question || pdfText) && !loading
               ? "cursor-pointer"
               : "pointer-events-none grayscale"
           }`}
