@@ -81,7 +81,7 @@ export default function Prompt() {
         </div>
         <input
           type="text"
-          placeholder="Enter Prompt.."
+          placeholder="Describe Your Requirement.."
           value={question}
           className="w-full m-1.5 p-1.5 outline-0 text-black/50 ml-[17px]"
           onChange={(e) => setQuestion(e.target.value)}
