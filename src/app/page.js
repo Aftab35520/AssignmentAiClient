@@ -5,6 +5,7 @@ import { useMyContext } from "./ContextApi/CreateContext";
 import Header from "./Home/Header";
 import Herro from "./Home/Herro";
 
+import GoogleAd from "./comonents/Ad1";
 import DownloadSection from "./comonents/Downloadpdf";
 import NotebookDisplay from "./comonents/NoteBookDisplay";
 import "./Globle.css";
@@ -28,7 +29,7 @@ export default function Page() {
 
   return (
     <div className="w-full h-dvh max-w-[2000px] flex flex-col items-center z-30 mt-4">
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center relative ">
         <Header />
         <Herro />
         <div className="flex flex-row-reverse relative FlexingCol">
@@ -39,6 +40,7 @@ export default function Page() {
               Handwriting={Handwriting}
             />
           )}
+          
 
           <NotebookDisplay
             Answer={Answer}
@@ -46,7 +48,11 @@ export default function Page() {
             Handwriting={Handwriting}
             HNumber={HNumber}
           />
-          
+  
+          {Answer !== "Loading" && Answer !== "Default" && (
+            <div className="absolute left-[12%]  top-[20px] w-[45%] h-[300px]  ad1"><GoogleAd/></div>
+          )}
+         
         </div>
         
       </div>

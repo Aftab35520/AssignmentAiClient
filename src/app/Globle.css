@@ -239,6 +239,10 @@ body {
   .FontSelectorMobile{
   display: block;
 }
+.ad1{
+  top: 130px;
+  width: 60%;
+}
 }
 @media (min-width: 768px) {
  .PaginatedNotebokMobile{

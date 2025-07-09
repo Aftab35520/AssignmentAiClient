@@ -15,7 +15,7 @@ export default function Prompt() {
   const [question, setQuestion] = useState("");
   const [file, setfile] = useState(null);
   const [message, setMessage] = useState(false);
-  const [pdfText, setPdfText] = useState("");
+  const [pdfText, setPdfText] = useState(null);
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -64,13 +64,16 @@ export default function Prompt() {
     }
     setQuestion("");
     setfile(null);
-    setPdfText("");
+    setPdfText(null);
     try {
       const response = await fetch(`${LiveUrl}extract`, {
         method: "POST",
         body: formData,
       });
-
+      // if (!response.ok) {
+      //   throw new Error("Network response was not ok");
+        
+      // }
       const data = await response.json();
       setAnswer(data.text);
     } catch (error) {
