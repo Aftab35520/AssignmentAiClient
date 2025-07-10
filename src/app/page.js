@@ -5,7 +5,6 @@ import { useMyContext } from "./ContextApi/CreateContext";
 import Header from "./Home/Header";
 import Herro from "./Home/Herro";
 
-import GoogleAd from "./comonents/Ad1";
 import DownloadSection from "./comonents/Downloadpdf";
 import NotebookDisplay from "./comonents/NoteBookDisplay";
 import "./Globle.css";
@@ -49,9 +48,9 @@ export default function Page() {
             HNumber={HNumber}
           />
   
-          {Answer !== "Loading" && Answer !== "Default" && (
+          {/* {Answer !== "Loading" && Answer !== "Default" && (
             <div className="absolute left-[12%]  top-[20px] w-[45%] h-[300px]  ad1"><GoogleAd/></div>
-          )}
+          )} */}
          
         </div>
         
